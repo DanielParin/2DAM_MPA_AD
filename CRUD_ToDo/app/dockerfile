@@ -1,0 +1,27 @@
+#Use the official Python base image
+FROM python:alpine3.19
+
+#Set the working directory in the container
+WORKDIR /usr/src/app
+
+#Copy the requirements file to the container
+COPY requirements.txt .
+
+#Install the Python dependencies
+RUN pip install --no-cache-dir -r requirements.txt
+
+#Copy the application code to the container
+COPY src .
+
+#Set enviroment variables for MongoDB connection
+ENV MONGO_HOST=mongo
+ENV MONGO_PORT=27017
+
+#Set enviroment variables for Mariadb connection
+
+
+#Expose the port on which the application will run
+EXPOSE 8086
+
+#Run the application
+CMD ["python", "./app.py"]
